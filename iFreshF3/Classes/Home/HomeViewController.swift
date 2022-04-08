@@ -85,6 +85,7 @@ class HomeViewController: SelectedAdressViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = LFBGlobalBackgroundColor
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: "Cell")
+//        collectionView.register(HomeCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerView")
         collectionView.register(HomeCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView")
         collectionView.register(HomeCollectionFooterView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView")
         
@@ -220,13 +221,16 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     //区头区尾视图
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section == 1 && kind == UICollectionElementKindSectionHeader {
-            let headView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! HomeCollectionHeaderView
-            return headView
+        if kind == UICollectionElementKindSectionHeader {
+//            if  indexPath.section == 1 {
+                let headView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView", for: indexPath) as! HomeCollectionHeaderView
+                return headView
+//            }
+            
         }
         
         let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView", for: indexPath) as! HomeCollectionFooterView
-        if indexPath.section == 1 && kind == UICollectionElementKindSectionFooter {
+        if indexPath.section == 1, kind == UICollectionElementKindSectionFooter {
             footerView.showLabel()
             footerView.tag = 100
         }else{
